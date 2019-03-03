@@ -1,2 +1,4 @@
 # docker-alpine-php7_FB.Switch
-FB.Switch in a prepared docker image with php7
+
+Dockerfile und Installationsscripte für folgende Installation und Einrichtung:
+- Alpine mit php7, Apache, [FB.Switch](https://github.com/bombcheck/FB.Switch) vorinstalliert.
