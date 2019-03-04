@@ -1,5 +1,5 @@
-/custom_config/*.xml
+/custom_config/*.*
 /custom_config/src/*
-/custom_config/backup/*.xml
+/custom_config/backup/*
 
 !.gitkeep
