@@ -132,7 +132,7 @@
       </address>
       <room>Infrastruktur</room>
       <senderid/>
-      <status>ON</status>
+      <status>OFF</status>
       <showDeviceStatus>BUTTON_ICON</showDeviceStatus>
       <sendCommandsOnlyOnce>false</sendCommandsOnlyOnce>
     </device>
@@ -149,7 +149,7 @@
       </address>
       <room>Infrastruktur</room>
       <senderid/>
-      <status>ON</status>
+      <status>OFF</status>
       <showDeviceStatus>BUTTON_ICON</showDeviceStatus>
       <sendCommandsOnlyOnce>false</sendCommandsOnlyOnce>
     </device>
@@ -166,7 +166,7 @@
       </address>
       <room>Infrastruktur</room>
       <senderid/>
-      <status>ON</status>
+      <status>OFF</status>
       <showDeviceStatus>BUTTON_ICON</showDeviceStatus>
       <sendCommandsOnlyOnce>false</sendCommandsOnlyOnce>
     </device>
@@ -183,7 +183,7 @@
       </address>
       <room>Infrastruktur</room>
       <senderid/>
-      <status>ON</status>
+      <status>OFF</status>
       <showDeviceStatus>BUTTON_ICON</showDeviceStatus>
       <sendCommandsOnlyOnce>false</sendCommandsOnlyOnce>
     </device>
@@ -200,7 +200,7 @@
       </address>
       <room>Infrastruktur</room>
       <senderid/>
-      <status>ON</status>
+      <status>OFF</status>
       <showDeviceStatus>BUTTON_ICON</showDeviceStatus>
       <sendCommandsOnlyOnce>false</sendCommandsOnlyOnce>
     </device>
@@ -217,7 +217,7 @@
       </address>
       <room>Infrastruktur</room>
       <senderid/>
-      <status>ON</status>
+      <status>OFF</status>
       <showDeviceStatus>BUTTON_ICON</showDeviceStatus>
       <sendCommandsOnlyOnce>false</sendCommandsOnlyOnce>
     </device>
@@ -253,7 +253,7 @@
       </address>
       <room>Infrastruktur</room>
       <senderid/>
-      <status>ON</status>
+      <status>OFF</status>
       <showDeviceStatus>BUTTON_ICON</showDeviceStatus>
       <sendCommandsOnlyOnce>false</sendCommandsOnlyOnce>
     </device>

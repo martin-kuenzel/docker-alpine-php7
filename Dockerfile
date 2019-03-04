@@ -1,7 +1,7 @@
 # x86 compatible
-FROM alpine:edge
+#FROM alpine:edge
 # rpi compatible
-#FROM arm32v6/alpine:edge
+FROM arm32v6/alpine:edge
 
 RUN apk add -U --progress --no-cache apache2 php7 php7-curl php7-xml php7-xmlrpc php7-ssh2 php7-fpm php7-apache2 php7-simplexml php7-dom php7-sockets php7-json && \
 rm -f /var/cache/apk/* && \

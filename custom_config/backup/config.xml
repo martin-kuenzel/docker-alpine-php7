@@ -200,7 +200,7 @@
       </address>
       <room>Infrastruktur</room>
       <senderid/>
-      <status>OFF</status>
+      <status>ON</status>
       <showDeviceStatus>BUTTON_ICON</showDeviceStatus>
       <sendCommandsOnlyOnce>false</sendCommandsOnlyOnce>
     </device>
