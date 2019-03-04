@@ -1,8 +1,6 @@
 #!/bin/bash
 
-COWSAY(){ COW=$(find /usr/share/cowsay/cows -name '*.cow' -type f | sort -R | head -1); cowsay -f "$COW" "$@"; }
-
-DOCKER_PROCNAME=$(docker ps -fa label=fb_switch --format="{{.Names}}") 
+. ./app.cfg
 
 #( rsync -avup "custom_config/.tmp"/ "src/FB.Switch/data"/.cache; )
 
@@ -17,4 +15,5 @@ docker run \
  -v "$(pwd)"/custom_config/.tmp:/var/www/localhost/htdocs/data/.cache \
  fb_switch 
 
-COWSAY "HELLO $(docker ps -fa label=fb_switch --format="{{.Names}}")"
+DOCKER_PROCNAME=$(docker ps -f label=fb_switch --format="{{.Names}}")
+COWSAY "HELLO $DOCKER_PROCNAME" #$(docker ps -fa label=fb_switch --format="{{.Names}}")"
