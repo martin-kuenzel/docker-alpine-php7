@@ -1,21 +1,20 @@
 #!/bin/bash
+. ./app.cfg
 
-SRCDIR=$( realpath $(dirname "$0") )
-SRC_FBSWITCH="$SRCDIR"/src/$( ls "$SRCDIR/src" ) 
-CUSTOM_CONFIG="$SRCDIR/custom_config"
+echo #########
+echo PROJEKT: $PROCNAME
+echo SOURCE: $SRCDIR
+echo SUBPROJEKT: $PROJECT_NAME
+echo CUSTOM_CONFIG: $(ls "$CUSTOM_CONFIG")
+echo #########
 
-echo $SRCDIR
-echo $SRC_FBSWITCH
-echo $CUSTOM_CONFIG 
+sudo $SRCDIR/tools/get_source.sh;
+sudo rsync -avup "$CUSTOM_CONFIG"/*.xml "$SRC_GITPROJECT"/data/
 
-sudo $SRCDIR/get_source_fb_switch.sh; \
-sudo rsync -avup "$CUSTOM_CONFIG"/*.xml "$SRC_FBSWITCH"/data/
- 
-
-#rsync -avup "$CUSTOM_CONFIG"/*.xml "$SRC_FBSWITCH"/data/.sys/
+#rsync -avup "$CUSTOM_CONFIG"/*.xml "$SRC_GITPROJECT"/data/.sys/
 #rsync -avup "$CUSTOM_CONFIG"/.tmp/*.xml "$SCR_FBSWITCH"/data/.cache
-rsync -avup "$CUSTOM_CONFIG"/.tmp/*.xml "$CUSTOM_CONFIG"/backup/
+rsync -avup "$CUSTOM_CONFIG"/.tmp/*.xml "$CUSTOM_CONFIG"/.backup/
 
-docker build --rm --force-rm --tag fb_switch "$SRCDIR";
+docker build --rm --force-rm --tag $PROJECT_NAME "$SRCDIR";
 
-$SRCDIR/run.sh
+. $SRCDIR/run.sh

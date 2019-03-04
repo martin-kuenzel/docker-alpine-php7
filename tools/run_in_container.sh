@@ -1,2 +1,5 @@
 #!/bin/bash
-docker exec $(docker ps -f label=fb_switch --format="{{.Names}}") $@
+. "$(dirname $0)"/../app.cfg
+
+SRCDIR=$( realpath $(dirname "$0")/.. )
+docker exec -it $(DOCKER_PROCNAME) $@
