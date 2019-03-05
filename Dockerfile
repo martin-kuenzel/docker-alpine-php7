@@ -3,7 +3,8 @@ FROM alpine:edge
 # rpi compatible
 #FROM arm32v6/alpine:edge
 
-RUN apk add -U --progress --no-cache apache2 php7 php7-curl php7-xml php7-xmlrpc php7-ssh2 php7-fpm php7-apache2 php7-simplexml php7-dom php7-sockets php7-json && \
+RUN apk add -U --progress --no-cache apache2 php7 php7-curl php7-xml php7-xmlrpc php7-ssh2 php7-fpm php7-apache2 php7-simplexml php7-dom php7-sockets php7-json php7-ssh2 && \
+
 rm -f /var/cache/apk/* && \
 mkdir -p /run/apache2 && \
 echo "ServerName html">>/etc/apache2/httpd.conf && \
@@ -11,9 +12,6 @@ echo "AddType application/x-httpd-php .php" >> /etc/apache2/httpd.conf && \
 echo "AddType application/x-httpd-phps .phps" >> /etc/apache2/httpd.conf && \
 echo "AddType application/x-httpd-php3 .php3 .phtml" >> /etc/apache2/httpd.conf && \
 echo "AddType application/x-httpd-php .html" >> /etc/apache2/httpd.conf 
-#&& ( ( crontab -l && (echo "*/1 * * * * wget -q http://127.0.0.1/fb-switch/index.php?timerrun -O /dev/null >> /dev/null 2>>/dev/null") ) | crontab - )
-
-#COPY src/FB.Switch /var/www/localhost/htdocs/
 
 EXPOSE 80
 
