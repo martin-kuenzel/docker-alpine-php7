@@ -12,7 +12,9 @@ echo "Hint: you need to be root to remove git-source @$SRC_GITPROJECT" && \
     sudo rm -rfv "$SRC_GITPROJECT" | sed -e '/ *directory */!d' -e '/\([/][^/]*\)\{4,\}/d'; \
 }; }; # || SRC_GITPROJECT=$SRCDIR;
 
+#[ -d "$SRCDIR"/src ] || mkdir "$SRCDIR"/src; 
+
 #exit 0
-( cd "$SRCDIR"/src && git clone $SRC_GIT "$PROJECT_NAME"  )
+( git clone $SRC_GIT "$SRC_GITPROJECT"  )
 #rm $TRANSPATH
 

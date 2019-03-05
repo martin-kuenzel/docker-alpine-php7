@@ -14,7 +14,7 @@ COW "Hello $USER. I'm afraid I have to tell you that container $(DOCKER_PROCNAME
 docker run \
  -it -d -p 80:80 \
  --label fb_switch \
- -v "$PROJECT_NAME":"/var/www/localhost/htdocs" \
+ -v "$SRC_GITPROJECT":"/var/www/localhost/htdocs" \
  -v "$CUSTOM_CONFIG/.tmp":"/var/www/localhost/htdocs/data/.cache" \
  -v "$CUSTOM_CONFIG/backup":"/var/www/localhost/htdocs/data/.sys" \
  fb_switch 

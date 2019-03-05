@@ -1,5 +1,5 @@
 /custom_config/*.*
-/src/
+/src/*
 /backup/*
 
 !.gitkeep
