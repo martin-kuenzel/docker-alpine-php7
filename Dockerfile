@@ -1,5 +1,5 @@
-# x86 compatible
 FROM alpine:edge
+# x86 compatible
 # rpi compatible
 #FROM arm32v6/alpine:edge
 
