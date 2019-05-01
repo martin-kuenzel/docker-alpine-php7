@@ -1,6 +1,9 @@
-/custom_config/*.*
-/src/*
-/backup/*
+#/custom_config/*.*
+src/*
 .Dockerfile
+
+custom_config/.tmp/*
+
+custom_config/backup/*
 
 !.gitkeep

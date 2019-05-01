@@ -25,14 +25,16 @@ tput sgr0;
 #  --name $PROJECT_NAME \
 #  $PROJECT_NAME
 
+# not a new installation, cp cached data into git source
+sudo find "$CUSTOM_CONFIG/.tmp/" -mindepth 1 -name '*' -exec cp -rv {} "$SRC_GITPROJECT/data" \; ;
+
 (
     (
     docker run \
         -it -d -p 80:80 \
         --label $PROJECT_NAME \
         -v "$SRC_GITPROJECT":"/var/www/localhost/htdocs" \
-        -v "$CUSTOM_CONFIG/.tmp":"/var/www/localhost/htdocs/data/.cache" \
-        -v "$CUSTOM_CONFIG/backup":"/var/www/localhost/htdocs/data/.sys" \
+        -v "$CUSTOM_CONFIG/.tmp":"/var/www/localhost/htdocs/.cache" \
         --name $PROJECT_NAME \
         $PROJECT_NAME
     ) && (
