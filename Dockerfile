@@ -15,16 +15,17 @@ echo "AddType application/x-httpd-php .html" >> /etc/apache2/httpd.conf
 
 EXPOSE 80
 
-ADD custom_config/backup_data.sh /usr/local/bin/backup_data.sh
+ADD custom_config/bin /usr/local/bin
 
 CMD ( \
- ( crontab -l && (echo "*/1 * * * * wget -q http://127.0.0.1/index.php?timerrun -O - >/dev/null 2>&1") )| crontab -; \
  chown -R apache:apache /var/www/localhost/htdocs; \
  chown -R apache:apache /var/www/localhost/htdocs/.cache/*.xml && \
  chmod -R 775 /var/www/localhost/htdocs/.cache/*.xml; \
- chmod 500 /usr/local/bin/backup_data.sh; \
+ 
+ find /usr/local/bin/ -type f -exec chmod 500 {} \; ; \
  
  ( ( /usr/local/bin/backup_data.sh >/dev/null 2>&1; ) & ); \
+ ( ( /usr/local/bin/run_timers.sh >/dev/null 2>&1; ) & ); \
  /usr/sbin/httpd -D FOREGROUND \
 )
 
