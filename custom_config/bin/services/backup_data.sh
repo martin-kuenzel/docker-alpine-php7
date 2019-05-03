@@ -4,8 +4,8 @@ CTIME=5
 
 while true; do
   [ $(( $(date +%s) % $CTIME )) -eq 0 ] && {
-    rsync -avup "/var/www/localhost/htdocs/data/" "/var/www/localhost/htdocs/.cache";
-    sleep $(( $CTIME - 2 ))
+    rsync -aup "/var/www/localhost/htdocs/data/" "/var/www/localhost/htdocs/.cache";
+    sleep $(( $CTIME / 2 ))
   }
 done
 exit 0;

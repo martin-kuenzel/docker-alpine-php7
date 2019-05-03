@@ -3,18 +3,15 @@
 
 COW "rebuilding and starting Project $PROJECT_NAME"
 
-#( rsync -avup "custom_config/.tmp"/ "src/FB.Switch/data"/.cache; )
-
 ( docker stop "$(DOCKER_PROCNAME)" ) >/dev/null 2>&1
 
-( docker rm $(docker ps -af name="$PROJECT_NAME" | awk '{print $1}' ) ) > /dev/null 2>&1
-( docker rm "$(DOCKER_PROCNAME)" )  >/dev/null 2>&1
-
 tput setaf 160
-COW "Hello $USER. I'm afraid I have to tell you that container $(DOCKER_PROCNAME) is no longer with us. We do not exactly know what happened yet and you are the only one who can find out... Farewell!"
+COW "Hello $USER. I'm afraid I have to tell you that container $(DOCKER_PROCNAME) will perish now... Farewell!"
 tput setaf 0;
 tput sgr0;
 
+( docker rm $(docker ps -af name="$PROJECT_NAME" | awk '{print $1}' ) ) > /dev/null 2>&1
+( docker rm "$(DOCKER_PROCNAME)" )  >/dev/null 2>&1
 
 # docker run \
 #  -it -d -p 80:80 \
@@ -26,7 +23,7 @@ tput sgr0;
 #  $PROJECT_NAME
 
 # not a new installation, cp cached data into git source
-sudo find "$CUSTOM_CONFIG/.tmp/" -mindepth 1 -name '*' -exec cp -rv {} "$SRC_GITPROJECT/data" \; ;
+sudo find "$CUSTOM_CONFIG/.tmp/" -mindepth 1 -name '*' -exec cp -r {} "$SRC_GITPROJECT/data" \; ;
 
 (
     (

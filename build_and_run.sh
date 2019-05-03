@@ -5,35 +5,40 @@ echo -e '\n#########'
 echo PROJEKT: $PROJECT_NAME
 echo SOURCE: $SRCDIR
 echo CUSTOM_CONFIG: $(ls "$CUSTOM_CONFIG")
-echo PLATFORM: $(PF)
+echo PLATFORM: $(PLATFORM)
 echo -e '#########\n'
 
-DOCKERFILE_TMP='./.Dockerfile'
+( cat <<HDOC
+FROM $(PLATFORM)
 
-# FROM part creation
-echo -e "FROM $(PF)" > "$DOCKERFILE_TMP"
+RUN $(INSTALLATION_ROUTINES)
 
-# adding Dockerfile body
-grep -vE '^FROM[\t ]*' ./Dockerfile >> "$DOCKERFILE_TMP"
+$(EXPOSE_PORTS)
 
-cat "$DOCKERFILE_TMP" > ./Dockerfile
+ADD custom_config/bin /usr/local/bin
 
+CMD ( \
+ chmod 500 -R "/usr/local/bin"; \
+ for i in \$( find /usr/local/bin/services -type f ); do \
+  ( ( "\$i" >/dev/null 2>&1 ) & ); \
+ done; \
+ $(CMD_PARTS) \
+)
+HDOC
+) > ./Dockerfile
+
+# get the current version of underlying software from GIT
 sudo $SRCDIR/tools/get_source.sh;
 
-# new installation without manual backup, rsync template into backup
+# if new installation without manual backup, cp template into backup
 ls "$CUSTOM_CONFIG/backup/config.xml" >/dev/null 2>&1; 
-[ $? -ne 0 ] && sudo rsync -avup "$SRC_GITPROJECT/data/" "$CUSTOM_CONFIG/backup";
-
-# rsync from backup into git source
-sudo find "$CUSTOM_CONFIG/backup/" -mindepth 1 -name '*' -exec cp -rv {} "$SRC_GITPROJECT/data" \; ;
+{ [ $? -ne 0 ] && sudo rsync -avup "$SRC_GITPROJECT/data/" "$CUSTOM_CONFIG/backup"; } || {
+  # else cp from backup into git source
+  sudo find "$CUSTOM_CONFIG/backup/" -mindepth 1 -name '*' -exec cp -r {} "$SRC_GITPROJECT/data" \; ;
+}
 
 # not a new installation, rsync cached data into git source
-sudo find "$CUSTOM_CONFIG/.tmp/" -mindepth 1 -name '*' -exec cp -rv {} "$SRC_GITPROJECT/data" \; ;
-#sudo cp -rv "$CUSTOM_CONFIG/.tmp/" "$SRC_GITPROJECT/data";
-
-#rsync -avup "$CUSTOM_CONFIG"/*.xml "$SRC_GITPROJECT"/data/.sys/
-#rsync -avup "$CUSTOM_CONFIG"/.tmp/*.xml "$SCR_FBSWITCH"/data/.cache
-#rsync -avup "$CUSTOM_CONFIG"/.tmp/ "$CUSTOM_CONFIG"/.backup/
+sudo find "$CUSTOM_CONFIG/.tmp/" -mindepth 1 -name '*' -exec cp -r {} "$SRC_GITPROJECT/data" \; ;
 
 docker build --rm --force-rm --tag $PROJECT_NAME "$SRCDIR";
 
